@@ -27,11 +27,14 @@ Dự án bài tập lớn học phần Đánh giá và Kiểm định chất lư
 |---|---|---|
 | 1 | Vũ Mai Quỳnh | 23010223 |
 | 2 | Trần Thị Ngoãn | 23010154 |
-## 🚀 Tổng Quan Dự Án
 
-**ToyStore** là giải pháp website bán đồ chơi trực tuyến trọn gói (Full-stack), được xây dựng từ đầu (From Scratch) sử dụng PHP thuần và MySQL. Dự án tập trung vào việc tối ưu hóa trải nghiệm người dùng và cung cấp công cụ quản trị mạnh mẽ, thể hiện tư duy lập trình hệ thống bài bản.
-
----
+## 2. MỤC TIÊU
+- Phân tích các yêu cầu chức năng và phi chức năng của website ToyStore.
+- Xây dựng kế hoạch, kịch bản và các trường hợp kiểm thử cho các chức năng chính của hệ thống.
+- Thực hiện kiểm thử Unit Test để đánh giá tính chính xác của các hàm xử lý trong chương trình.
+- Sử dụng Postman để kiểm tra các yêu cầu HTTP và khả năng phản hồi của website.
+- Sử dụng JMeter để đánh giá hiệu năng và khả năng chịu tải khi có nhiều người dùng truy cập đồng thời.
+- Phát hiện lỗi trong quá trình xử lý dữ liệu, quản lý sản phẩm, giỏ hàng và đặt hàng; tổng hợp kết quả, đánh giá chất lượng và đề xuất hướng khắc phục.
 
 ## 📂 Cấu Trúc Thư Mục (Project Structure)
 
