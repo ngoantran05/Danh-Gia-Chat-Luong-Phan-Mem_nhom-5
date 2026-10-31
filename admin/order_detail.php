@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 session_start();
 require_once '../config/db.php';
 
@@ -8,7 +11,8 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] != 'admin') {
 }
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$db = new Database();
+$conn = $db->conn;
 
 // XỬ LÝ CẬP NHẬT TRẠNG THÁI
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['status'])) {
@@ -99,7 +103,8 @@ $items = $conn->query("
                     style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 15px; font-weight: bold;">
                     <option value="0" <?= ($cur_st == '0' || $cur_st == 'Chờ xử lý') ? 'selected' : '' ?>>🕒 Chờ xử lý
                     </option>
-                    <option value="1" <?= ($cur_st == '1' || $cur_st == 'Đang giao hàng') ? 'selected' : '' ?>>🚚 Đang giao
+                    <option value="1" <?= ($cur_st == '1' || $cur_st == 'Đang giao hàng') ? 'selected' : '' ?>>🚚 Đang
+                        giao
                         hàng</option>
                     <option value="2" <?= ($cur_st == '2' || $cur_st == 'Hoàn thành') ? 'selected' : '' ?>>✅ Hoàn thành
                     </option>

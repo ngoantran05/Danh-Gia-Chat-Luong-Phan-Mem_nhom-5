@@ -258,7 +258,88 @@ foreach ($_SESSION['cart'] as $item) {
                         placeholder="Số nhà, tên đường, phường/xã, quận/huyện..."
                         required><?= isset($data['user_info']['address']) ? $data['user_info']['address'] : '' ?></textarea>
                 </div>
+                <div class="form-group">
+                    <label class="form-label">Phương thức thanh toán:</label>
 
+                    <label style="display:flex; align-items:center; gap:10px; margin-bottom:15px; cursor:pointer;">
+                        <input type="radio" name="payment_method" value="COD" checked>
+                        <i class="fa fa-money-bill-wave" style="color:#FF6F00;"></i>
+                        <span>Thanh toán khi nhận hàng (COD)</span>
+                    </label>
+
+                    <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+                        <input type="radio" name="payment_method" value="Chuyển khoản ngân hàng">
+                        <i class="fa fa-university" style="color:#FF6F00;"></i>
+                        <span>Chuyển khoản ngân hàng</span>
+                    </label>
+                </div>
+
+                <!-- Thông tin chuyển khoản -->
+                <div id="bank-info" style="display:none; padding:20px; border:1px solid #ddd;
+    border-radius:10px; margin-bottom:20px;">
+                    <div style="text-align:center; margin-top:15px;">
+                        <p>
+                            <strong>Số tiền cần thanh toán:</strong>
+                            <span style="color:#e53935; font-weight:bold;">
+                                <?= number_format($total, 0, ',', '.') ?> VNĐ
+                            </span>
+                        </p>
+
+                        <p>
+                            <strong>Nội dung chuyển khoản:</strong>
+                            <span id="transfer-content">TOYSTORE THANHTOAN</span>
+                        </p>
+                        <img id="bank-qr" src="" alt="Mã QR chuyển khoản" style="width:220px; max-width:100%;">
+                        <p>Quét mã QR để chuyển khoản</p>
+                    </div>
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const radios = document.querySelectorAll(
+                            'input[name="payment_method"]'
+                        );
+
+                        const bankInfo = document.getElementById('bank-info');
+                        const qr = document.getElementById('bank-qr');
+
+                        // Thay bằng thông tin ngân hàng thật của cửa hàng
+                        const bankCode = 'VPB';
+                        const accountNumber = '0342487601';
+                        const accountName = 'TRAN THI NGOAN';
+
+                        function updatePayment() {
+                            const selected = document.querySelector(
+                                'input[name="payment_method"]:checked'
+                            );
+
+                            if (selected && selected.value === 'Chuyển khoản ngân hàng') {
+                                bankInfo.style.display = 'block';
+
+                                const description = <?= json_encode('TOYSTORE DH' . $orderId) ?>;
+
+                                const amount = <?= (int)$total ?>;
+
+                                const qrUrl =
+                                    'https://img.vietqr.io/image/' +
+                                    bankCode + '-' + accountNumber +
+                                    '-qr_only.png?amount=' + amount +
+                                    '&addInfo=' + encodeURIComponent(description) +
+                                    '&accountName=' + encodeURIComponent(accountName);
+
+                                document.getElementById('bank-qr').src = qrUrl;
+                            } else {
+                                bankInfo.style.display = 'none';
+                                qr.src = '';
+                            }
+                        }
+
+                        radios.forEach(function(radio) {
+                            radio.addEventListener('change', updatePayment);
+                        });
+
+                        updatePayment();
+                    });
+                </script>
                 <div class="form-group">
                     <label class="form-label">Ghi chú thêm (Nếu có):</label>
                     <textarea name="note" class="custom-input" rows="2"
@@ -278,19 +359,37 @@ foreach ($_SESSION['cart'] as $item) {
 
             <div class="cart-summary">
                 <?php foreach ($_SESSION['cart'] as $item): ?>
+
+                    <?php
+                    $image = trim($item['image'] ?? '');
+                    $image = ltrim($image, '/');
+
+                    // Nếu chỉ có tên ảnh thì thêm thư mục assets/images
+                    if (strpos($image, '/') === false) {
+                        $image = 'assets/images/' . $image;
+                    }
+                    ?>
+
                     <div class="cart-item-mini">
-                        <img src="assets/images/<?= $item['image'] ?>" class="item-thumb" alt="sp">
+                        <img src="/Toy_Store-main/<?= htmlspecialchars($image, ENT_QUOTES, 'UTF-8') ?>" class="item-thumb"
+                            alt="<?= htmlspecialchars($item['name'] ?? 'Sản phẩm', ENT_QUOTES, 'UTF-8') ?>"
+                            onerror="this.onerror=null; this.src='/Toy_Store-main/assets/images/no-image.png';">
 
                         <div class="item-details">
-                            <div class="item-name"><?= $item['name'] ?></div>
+                            <div class="item-name">
+                                <?= htmlspecialchars($item['name'], ENT_QUOTES, 'UTF-8') ?>
+                            </div>
+
                             <div class="item-meta">
-                                Số lượng: <strong>x<?= $item['qty'] ?></strong>
+                                Số lượng: <strong>x<?= (int)$item['qty'] ?></strong>
                             </div>
                         </div>
+
                         <div class="item-price">
                             <?= number_format($item['price'] * $item['qty']) ?>đ
                         </div>
                     </div>
+
                 <?php endforeach; ?>
             </div>
 

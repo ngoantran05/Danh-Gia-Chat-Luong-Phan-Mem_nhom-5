@@ -1,5 +1,14 @@
 <?php
 session_start();
+
+if (
+    !isset($_SESSION['user']) ||
+    !isset($_SESSION['user']['role']) ||
+    $_SESSION['user']['role'] !== 'admin'
+) {
+    header("Location: ../login.php");
+    exit();
+}
 require_once '../config/db.php';
 
 //1. KHỞI TẠO KẾT NỐI DATABASE 
@@ -96,7 +105,7 @@ if ($page == 'orders') {
                     class="fa fa-arrow-right"></i></a>
         </div>
 
-        <table>
+        <table style="width:100%; min-width:1000px;">
             <thead>
                 <tr>
                     <th>Mã đơn</th>
@@ -104,33 +113,89 @@ if ($page == 'orders') {
                     <th>Tổng tiền</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
+                    <th>Phương thức thanh toán</th>
                 </tr>
             </thead>
+
             <tbody>
                 <?php if ($data['recent_orders']->num_rows > 0): ?>
+
                     <?php while ($row = $data['recent_orders']->fetch_assoc()):
+
                         $badge = 'status-wait';
+
                         if ($row['status'] == 'Đang giao hàng')
                             $badge = 'status-ship';
+
                         if ($row['status'] == 'Hoàn thành')
                             $badge = 'status-done';
+
                         if ($row['status'] == 'Đã hủy')
                             $badge = 'status-cancel';
-                        ?>
+
+                        $payment = $row['payment_method'] ?? '';
+                    ?>
+
                         <tr>
-                            <td><b style="color:#333;">#<?php echo $row['id']; ?></b></td>
-                            <td><b><?php echo $row['fullname'] ?? 'Khách lẻ'; ?></b></td>
-                            <td style="color: var(--c-green); font-weight:bold;"><?php echo number_format($row['total_money']); ?> đ
+                            <td>
+                                <b style="color:#333;">
+                                    #<?php echo $row['id']; ?>
+                                </b>
                             </td>
-                            <td><span class="status-badge <?php echo $badge; ?>"><?php echo $row['status']; ?></span></td>
-                            <td><a href="order_detail.php?id=<?php echo $row['id']; ?>" class="btn-action btn-view"><i
-                                        class="fa fa-eye"></i> Chi tiết</a></td>
+
+                            <td>
+                                <b><?php echo htmlspecialchars($row['fullname'] ?? 'Khách lẻ'); ?></b>
+                            </td>
+
+                            <td style="color:var(--c-green); font-weight:bold;">
+                                <?php echo number_format($row['total_money']); ?> đ
+                            </td>
+
+                            <td>
+                                <span class="status-badge <?php echo $badge; ?>">
+                                    <?php echo htmlspecialchars($row['status']); ?>
+                                </span>
+                            </td>
+
+                            <td>
+                                <a href="order_detail.php?id=<?php echo $row['id']; ?>" class="btn-action btn-view">
+                                    <i class="fa fa-eye"></i> Chi tiết
+                                </a>
+                            </td>
+
+                            <td>
+                                <?php if ($payment == 'COD'): ?>
+
+                                    <span style="color:#e67e22; font-weight:bold;">
+                                        Thanh toán khi nhận hàng
+                                    </span>
+
+                                <?php elseif ($payment == 'Chuyển khoản ngân hàng'): ?>
+
+                                    <span style="color:#2196F3; font-weight:bold;">
+                                        Chuyển khoản ngân hàng
+                                    </span>
+
+                                <?php else: ?>
+
+                                    <span style="color:#999;">
+                                        Chưa xác định
+                                    </span>
+
+                                <?php endif; ?>
+                            </td>
                         </tr>
+
                     <?php endwhile; ?>
+
                 <?php else: ?>
+
                     <tr>
-                        <td colspan="5" style="text-align:center; padding:30px;">Chưa có đơn hàng nào.</td>
+                        <td colspan="6" style="text-align:center; padding:30px;">
+                            Chưa có đơn hàng nào.
+                        </td>
                     </tr>
+
                 <?php endif; ?>
             </tbody>
         </table>
@@ -140,36 +205,51 @@ if ($page == 'orders') {
             <div class="section-title">Danh sách sản phẩm (<?php echo $data['total']; ?>)</div>
             <a href="product_add.php" class="btn-add"><i class="fa fa-plus"></i> Thêm mới</a>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Ảnh</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Giá bán</th>
-                    <th>Tồn kho</th>
-                    <th>Hành động</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = $data['list']->fetch_assoc()): ?>
+        <div style="width:100%; overflow-x:auto;">
+            <table style="width:100%; min-width:1100px;">
+                <thead>
                     <tr>
-                        <td><img src="../assets/images/<?php echo $row['image']; ?>" width="50" style="border-radius:5px;"></td>
-                        <td><b><?php echo $row['name']; ?></b><br><span style="color:#999; font-size:12px;">ID:
-                                #<?php echo $row['id']; ?></span></td>
-                        <td style="color:#d32f2f; font-weight:bold;"><?php echo number_format($row['price']); ?> đ</td>
-                        <td><?php echo $row['stock']; ?></td>
-                        <td>
-                            <a href="product_edit.php?id=<?php echo $row['id']; ?>" class="btn-action btn-edit"><i
-                                    class="fa fa-edit"></i></a>
-                            <a href="index.php?page=products&delete_id=<?php echo $row['id']; ?>"
-                                onclick="return confirm('Xóa sản phẩm này?')" class="btn-action btn-delete"><i
-                                    class="fa fa-trash"></i></a>
-                        </td>
+                        <th>Ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá bán</th>
+                        <th>Tồn kho</th>
+                        <th>Hành động</th>
                     </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php while ($row = $data['list']->fetch_assoc()): ?>
+                        <tr>
+                            <td>
+                                <?php
+                                $imageName = basename(str_replace('\\', '/', $row['image'] ?? ''));
 
+                                $imagePath = "../assets/images/" . $imageName;
+
+                                if (empty($imageName) || !file_exists(__DIR__ . "/../assets/images/" . $imageName)) {
+                                    $imagePath = "../assets/images/no-image.png";
+                                }
+                                ?>
+
+                                <img src="<?php echo htmlspecialchars($imagePath); ?>" width="70" height="70"
+                                    style="border-radius:8px; object-fit:contain; background:#fff7f1;"
+                                    alt="<?php echo htmlspecialchars($row['name']); ?>">
+                            </td>
+                            <td><b><?php echo $row['name']; ?></b><br><span style="color:#999; font-size:12px;">ID:
+                                    #<?php echo $row['id']; ?></span></td>
+                            <td style="color:#d32f2f; font-weight:bold;"><?php echo number_format($row['price']); ?> đ</td>
+                            <td><?php echo $row['stock']; ?></td>
+                            <td>
+                                <a href="product_edit.php?id=<?php echo $row['id']; ?>" class="btn-action btn-edit"><i
+                                        class="fa fa-edit"></i></a>
+                                <a href="index.php?page=products&delete_id=<?php echo $row['id']; ?>"
+                                    onclick="return confirm('Xóa sản phẩm này?')" class="btn-action btn-delete"><i
+                                        class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
         <?php if ($data['pages'] > 1): ?>
             <div class="pagination">
                 <?php for ($i = 1; $i <= $data['pages']; $i++): ?>
@@ -224,12 +304,13 @@ if ($page == 'orders') {
                     }
 
                     $date = date('d/m/Y H:i', strtotime($row['created_at']));
-                    ?>
+                ?>
                     <tr>
                         <td><b style="color:#333;">#<?php echo $row['id']; ?></b></td>
                         <td>
                             <b><?php echo $row['fullname'] ?? 'Khách lẻ'; ?></b><br>
-                            <span style="font-size: 12px; color: #888;"><i class="fa fa-clock"></i> <?php echo $date; ?></span>
+                            <span style="font-size: 12px; color: #888;"><i class="fa fa-clock"></i>
+                                <?php echo $date; ?></span>
                         </td>
                         <td style="color: var(--c-green); font-weight: bold;">
                             <?php echo number_format($row['total_money']); ?> đ

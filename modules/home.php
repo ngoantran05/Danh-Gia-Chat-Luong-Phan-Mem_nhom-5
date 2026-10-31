@@ -256,6 +256,122 @@
             padding: 10px 5px;
         }
     }
+
+    /* ===== BANNER TRANG CHỦ TOYSTORE ===== */
+
+    .toy-hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 35px;
+        min-height: 390px;
+        padding: 35px 55px;
+        margin: 10px 0 45px;
+        border-radius: 25px;
+        background: linear-gradient(120deg, #fff0d9, #fff8eb);
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .toy-hero-content {
+        padding: 15px 0;
+    }
+
+    .toy-hero-content .toy-hero-label {
+        display: inline-block;
+        padding: 8px 15px;
+        border-radius: 20px;
+        background: #fff;
+        color: #ff7418;
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+    .toy-hero-content h1 {
+        margin: 22px 0;
+        color: #263859;
+        font-size: 42px;
+        font-weight: 800;
+        line-height: 1.3;
+    }
+
+    .toy-hero-content h1 span {
+        color: #ff5722;
+    }
+
+    .toy-hero-content p {
+        margin: 15px 0 25px;
+        color: #5b6475;
+        font-size: 16px;
+        line-height: 1.8;
+    }
+
+    .toy-hero-content .toy-hero-button {
+        display: inline-block;
+        padding: 13px 25px;
+        border-radius: 30px;
+        background: linear-gradient(90deg, #ff8a00, #ff5722);
+        color: white;
+        font-weight: 800;
+        text-decoration: none;
+        transition: .3s;
+    }
+
+    .toy-hero-content .toy-hero-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px #ff8a2455;
+    }
+
+    .toy-hero-image {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 320px;
+    }
+
+    .toy-hero-image img {
+        width: 100%;
+        height: 100%;
+        max-width: 430px;
+        object-fit: contain;
+        border-radius: 20px;
+    }
+
+    .toy-hero-sticker {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 12px 18px;
+        border-radius: 15px;
+        background: #ff6178;
+        color: white;
+        font-weight: 800;
+        text-align: center;
+        box-shadow: 0 5px 15px #ff617855;
+    }
+
+    /* Hiển thị trên điện thoại */
+    @media (max-width: 700px) {
+        .toy-hero {
+            grid-template-columns: 1fr;
+            padding: 25px;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .toy-hero-content h1 {
+            font-size: 30px;
+        }
+
+        .toy-hero-image {
+            height: 230px;
+        }
+
+        .toy-hero-image img {
+            max-width: 280px;
+        }
+    }
 </style>
 
 <div class="home-container">
@@ -274,7 +390,6 @@
 
         <div class="toy-hero-image">
             <img src="/Toy_Store-main/assets/images/gau_bong.jpg" alt="Gấu bông dễ thương">
-            <div class="toy-hero-sticker">⭐<br>Yêu thích</div>
         </div>
     </section>
 
@@ -290,17 +405,27 @@
                 <div class="product-card">
                     <span class="badge-new">NEW</span>
 
+
                     <a href="index.php?mod=detail&id=<?php echo $row['id']; ?>" class="img-wrapper">
-                        <img src="/Toy_Store-main/<?php
-                                                    echo htmlspecialchars(
-                                                        ltrim($row['image'] ?? '', '/'),
-                                                        ENT_QUOTES,
-                                                        'UTF-8'
-                                                    );
-                                                    ?>" class="product-img"
-                            alt="<?php echo htmlspecialchars($row['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
-                            onerror="console.error('Lỗi tải ảnh:', this.src);">
+
+                        <?php
+                        $imageName = trim($row['image'] ?? '');
+
+                        if (empty($imageName)) {
+                            $imagePath = 'assets/images/no-image.png';
+                        } elseif (strpos($imageName, 'assets/images/') === 0) {
+                            $imagePath = $imageName;
+                        } else {
+                            $imagePath = 'assets/images/' . basename($imageName);
+                        }
+                        ?>
+
+                        <img src="/Toy_Store-main/<?php echo htmlspecialchars($imagePath, ENT_QUOTES, 'UTF-8'); ?>"
+                            class="product-img" alt="<?php echo htmlspecialchars($row['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                            onerror="this.onerror=null; this.src='/Toy_Store-main/assets/images/no-image.png';">
+
                     </a>
+
 
                     <div class="product-info">
                         <div class="product-name">

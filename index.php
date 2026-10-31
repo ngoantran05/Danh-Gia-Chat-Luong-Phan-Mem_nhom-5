@@ -132,36 +132,157 @@ switch ($mod) {
             exit;
         }
 
+
         $user = $_SESSION['user'];
 
-        // XỬ LÝ KHI BẤM NÚT "ĐẶT HÀNG"
+        // XỬ LÝ KHI BẤM NÚT ĐẶT HÀNG
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             $fullname = $_POST['fullname'];
             $phone = $_POST['phone'];
             $address = $_POST['address'];
             $note = isset($_POST['note']) ? $_POST['note'] : '';
             $email = $user['email'];
+            $payment_method = $_POST['payment_method'] ?? 'COD';
+            // Kiểm tra giỏ hàng
+            if (empty($_SESSION['cart'])) {
+                echo "<script>alert('Giỏ hàng đang trống!'); window.location.href='index.php?mod=cart';</script>";
+                exit;
+            }
 
             $total = 0;
             foreach ($_SESSION['cart'] as $item) {
                 $total += $item['price'] * $item['qty'];
             }
 
-            $orderId = $orderModel->createOrder($user['id'], $fullname, $email, $phone, $address, $note, $total);
+            $conn = $orderModel->db->conn;
 
-            if ($orderId) {
+            try {
+                // Bắt đầu giao dịch
+                $conn->begin_transaction();
 
+                // Tạo đơn hàng
+                $payment_method = $_POST['payment_method'] ?? 'COD';
+
+                $orderId = $orderModel->createOrder(
+                    $user['id'],
+                    $fullname,
+                    $email,
+                    $phone,
+                    $address,
+                    $note,
+                    $total,
+                    $payment_method
+                );
+
+                if (!$orderId) {
+                    throw new Exception("Không thể tạo đơn hàng!");
+                }
+                $description = 'TOYSTORE DH' . $orderId;
+                // Kiểm tra và trừ tồn kho từng sản phẩm
                 foreach ($_SESSION['cart'] as $pId => $item) {
-                    $orderModel->addOrderDetail($orderId, $pId, $item['price'], $item['qty']);
+
+                    $productId = (int)$pId;
+                    $quantity = (int)$item['qty'];
+                    $price = (int)$item['price'];
+
+                    if ($productId <= 0 || $quantity <= 0) {
+                        throw new Exception("Số lượng sản phẩm không hợp lệ!");
+                    }
+
+                    // Khóa sản phẩm và kiểm tra tồn kho
+                    $stmt = $conn->prepare(
+                        "SELECT stock, name FROM products WHERE id = ? FOR UPDATE"
+                    );
+
+                    if (!$stmt) {
+                        throw new Exception("Không thể kiểm tra tồn kho!");
+                    }
+
+                    $stmt->bind_param("i", $productId);
+                    $stmt->execute();
+                    $stmt->bind_result($stock, $productName);
+
+                    $found = $stmt->fetch();
+                    $stmt->close();
+
+                    if (!$found) {
+                        throw new Exception("Không tìm thấy sản phẩm!");
+                    }
+
+                    if ($stock < $quantity) {
+                        throw new Exception(
+                            "Sản phẩm $productName chỉ còn $stock sản phẩm!"
+                        );
+                    }
+
+                    // Trừ tồn kho
+                    $stmt = $conn->prepare(
+                        "UPDATE products
+                 SET stock = stock - ?
+                 WHERE id = ? AND stock >= ?"
+                    );
+
+                    if (!$stmt) {
+                        throw new Exception("Không thể cập nhật tồn kho!");
+                    }
+
+                    $stmt->bind_param(
+                        "iii",
+                        $quantity,
+                        $productId,
+                        $quantity
+                    );
+
+                    $stmt->execute();
+
+                    if ($stmt->affected_rows != 1) {
+                        $stmt->close();
+                        throw new Exception("Trừ tồn kho thất bại!");
+                    }
+
+                    $stmt->close();
+
+                    // Lưu chi tiết đơn hàng
+                    if (!$orderModel->addOrderDetail(
+                        $orderId,
+                        $productId,
+                        $price,
+                        $quantity
+                    )) {
+                        throw new Exception("Không thể lưu chi tiết đơn hàng!");
+                    }
                 }
 
+                // Xác nhận giao dịch
+                $conn->commit();
+
+                // Xóa giỏ hàng sau khi thành công
                 unset($_SESSION['cart']);
-                echo "<script>alert('Đặt hàng thành công!'); window.location.href='index.php?mod=orders';</script>";
+
+                echo "<script>
+            alert('Đặt hàng thành công!');
+            window.location.href='index.php?mod=orders';
+        </script>";
                 exit;
-            } else {
-                echo "<script>alert('Lỗi đặt hàng!');</script>";
+            } catch (Throwable $e) {
+
+                // Có lỗi thì hoàn tác
+                $conn->rollback();
+
+                $errorMessage = json_encode(
+                    $e->getMessage(),
+                    JSON_UNESCAPED_UNICODE
+                );
+
+                echo "<script>
+            alert('Đặt hàng thất bại: ' + $errorMessage);
+            history.back();
+        </script>";
+                exit;
             }
         }
+
 
         require_once 'modules/checkout.php';
         break;

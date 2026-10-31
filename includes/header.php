@@ -298,8 +298,8 @@ if (isset($_SESSION['cart'])) {
                                 Xin chào, <?= htmlspecialchars($show_name) ?>!
                             </div>
 
-                            <?php if (isset($user['role']) && $user['role'] == 'admin'): ?>
-                                <a href="admin/index.php"><i class="fa fa-tachometer-alt"></i> Quản trị Shop</a>
+                            <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'): ?>
+                                <a href="admin/index.php">Quản trị shop</a>
                             <?php endif; ?>
 
                             <a href="index.php?mod=profile"><i class="fa fa-id-card"></i> Hồ sơ của tôi</a>
