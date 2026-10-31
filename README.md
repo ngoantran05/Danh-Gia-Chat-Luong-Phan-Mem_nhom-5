@@ -35,6 +35,33 @@ Dự án bài tập lớn học phần Đánh giá và Kiểm định chất lư
 - Sử dụng Postman để kiểm tra các yêu cầu HTTP và khả năng phản hồi của website.
 - Sử dụng JMeter để đánh giá hiệu năng và khả năng chịu tải khi có nhiều người dùng truy cập đồng thời.
 - Phát hiện lỗi trong quá trình xử lý dữ liệu, quản lý sản phẩm, giỏ hàng và đặt hàng; tổng hợp kết quả, đánh giá chất lượng và đề xuất hướng khắc phục.
+## 3. CHỨC NĂNG
+## 3.1. Chức năng dành cho khách hàng
+Website ToyStore cung cấp các chức năng chính dành cho khách hàng như sau:
+
+| STT | Chức năng | Mô tả |
+|---:|---|---|
+| 1 | Xem trang chủ | Hiển thị banner, sản phẩm và danh mục đồ chơi |
+| 2 | Xem danh mục | Hiển thị sản phẩm theo từng danh mục |
+| 3 | Tìm kiếm sản phẩm | Tìm sản phẩm theo từ khóa |
+| 4 | Xem chi tiết sản phẩm | Hiển thị hình ảnh, giá và thông tin sản phẩm |
+| 5 | Đăng ký tài khoản | Tạo tài khoản khách hàng |
+| 6 | Đăng nhập | Xác thực thông tin tài khoản |
+| 7 | Giỏ hàng | Thêm, cập nhật và xóa sản phẩm |
+| 8 | Đặt hàng | Nhập thông tin nhận hàng và xác nhận đơn |
+| 9 | Thanh toán | Lựa chọn phương thức thanh toán |
+| 10 | Theo dõi đơn hàng | Xem thông tin đơn hàng đã đặt |
+
+## 3.2. Chức năng dành cho quản trị viên
+
+| STT | Chức năng | Mô tả |
+|---:|---|---|
+| 1 | Đăng nhập quản trị | Xác thực tài khoản quản trị viên |
+| 2 | Quản lý sản phẩm | Thêm, sửa, xóa và xem sản phẩm |
+| 3 | Quản lý danh mục | Quản lý các nhóm sản phẩm |
+| 4 | Quản lý đơn hàng | Xem và cập nhật trạng thái đơn hàng |
+| 5 | Quản lý người dùng | Theo dõi thông tin khách hàng |
+| 6 | Quản lý dữ liệu | Kiểm tra và quản lý thông tin trong hệ thống |
 
 ## 📂 Cấu Trúc Thư Mục (Project Structure)
 
