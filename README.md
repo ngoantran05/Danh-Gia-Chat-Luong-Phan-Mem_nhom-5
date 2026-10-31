@@ -14,7 +14,19 @@ Dự án bài tập lớn học phần Đánh giá và Kiểm định chất lư
 7. [Đội Ngũ Phát Triển](#-đội-ngũ-phát-triển)
 
 ---
-
+## 1. Thông tin đề tài
+| **Nội dung** | **Thông tin** |
+|---|---|
+| Tên đề tài | Kiểm thử và đánh giá chất lượng website ToyStore – nền tảng thương mại điện tử dành cho trẻ em |
+| Học phần | Đánh giá và kiểm định chất lượng phần mềm |
+| Giảng viên hướng dẫn | TS. Trịnh Thanh Bình |
+| Đơn vị | Trường Công nghệ thông tin, Đại học Phenikaa |
+| Thời gian báo cáo | Tháng 10/2026 |
+## Thành viên thực hiện 
+| **STT** | **Họ và tên** | **Mã sinh viên** | 
+|---|---|---|
+| 1 | Vũ Mai Quỳnh | 23010223 |
+| 2 | Trần Thị Ngoãn | 23010154 |
 ## 🚀 Tổng Quan Dự Án
 
 **ToyStore** là giải pháp website bán đồ chơi trực tuyến trọn gói (Full-stack), được xây dựng từ đầu (From Scratch) sử dụng PHP thuần và MySQL. Dự án tập trung vào việc tối ưu hóa trải nghiệm người dùng và cung cấp công cụ quản trị mạnh mẽ, thể hiện tư duy lập trình hệ thống bài bản.
