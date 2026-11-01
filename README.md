@@ -3,16 +3,20 @@
 Dự án bài tập lớn học phần Đánh giá và Kiểm định chất lượng phần mềm, Trường Công nghệ thông tin, Đại học Phenikaa.
 Đề tài tập trung phân tích yêu cầu, xây dựng kế hoạch kiểm thử, thiết kế test case, thực thi và đánh giá chất lượng website ToyStore – nền tảng thương mại điện tử chuyên cung cấp các sản phẩm đồ chơi dành cho trẻ em.
 ![Giao diện trang chủ ToyStore](images/home.png)
-## 📖 Mục Lục
 
-1. [Tổng Quan Dự Án](#-tổng-quan-dự-án)
-2. [Cấu Trúc Thư Mục](#-cấu-trúc-thư-mục-project-structure)
-3. [Kiến Trúc Hệ Thống](#-kiến-trúc-hệ-thống)
-4. [Chức Năng Chi Tiết](#-chức-năng-chi-tiết)
-5. [Yêu Cầu Cài Đặt](#-yêu-cầu-cài-đặt)
-6. [Hướng Dẫn Triển Khai](#-hướng-dẫn-triển-khai)
-7. [Đội Ngũ Phát Triển](#-đội-ngũ-phát-triển)
+## 📖 MỤC LỤC
 
+1. [Thông tin đề tài](#1-thông-tin-đề-tài)
+2. [Mục tiêu](#2-mục-tiêu)
+3. [Chức năng](#3-chức-năng)
+4. [Công nghệ sử dụng](#4-công-nghệ-sử-dụng)
+5. [Cấu trúc thư mục](#-cấu-trúc-thư-mục-project-structure)
+6. [Cài đặt và chạy dự án](#6-cài-đặt-và-chạy-dự-án)
+7. [Kiểm thử phần mềm](#7-kiểm-thử-phần-mềm)
+8. [Kết quả kiểm thử](#8-kết-quả-kiểm-thử)
+9. [Các vấn đề đã biết](#9-các-vấn-đề-đã-biết)
+10. [Hướng phát triển](#10-hướng-phát-triển)
+11. [Tài liệu](#11-tài-liệu)
 ---
 ## 1. Thông tin đề tài
 | **Nội dung** | **Thông tin** |
