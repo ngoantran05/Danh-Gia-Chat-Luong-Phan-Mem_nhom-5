@@ -36,8 +36,10 @@ Dự án bài tập lớn học phần Đánh giá và Kiểm định chất lư
 - Sử dụng JMeter để đánh giá hiệu năng và khả năng chịu tải khi có nhiều người dùng truy cập đồng thời.
 - Phát hiện lỗi trong quá trình xử lý dữ liệu, quản lý sản phẩm, giỏ hàng và đặt hàng; tổng hợp kết quả, đánh giá chất lượng và đề xuất hướng khắc phục.
 ## 3. CHỨC NĂNG
+Website có hai nhóm tác nhân: Khách hàng và quản trị viên
+** Biểu đồ usecase tổng quát**
 ![Biểu đồ usecase](images/bieudousecase.png)
-
+Biểu đồ trích từ báo cáo, mô tả phạm vi yêu cầu. Một số chức năng trong thiết kế chưa được triển khai đầy đủ.
 ## 3.1. Chức năng dành cho khách hàng
 Website ToyStore cung cấp các chức năng chính dành cho khách hàng như sau:
 
@@ -64,7 +66,20 @@ Website ToyStore cung cấp các chức năng chính dành cho khách hàng như
 | 4 | Quản lý đơn hàng | Xem và cập nhật trạng thái đơn hàng |
 | 5 | Quản lý người dùng | Theo dõi thông tin khách hàng |
 | 6 | Quản lý dữ liệu | Kiểm tra và quản lý thông tin trong hệ thống |
-
+## 4. Công nghệ sử dụng
+STT	Công nghệ / Công cụ	Vai trò và mục đích sử dụng
+1	PHP	Xây dựng và xử lý các chức năng phía máy chủ của website.
+2	MySQL	Lưu trữ và quản lý dữ liệu sản phẩm, tài khoản, giỏ hàng và đơn hàng.
+3	HTML	Xây dựng cấu trúc các trang web.
+4	CSS	Thiết kế giao diện, bố cục và màu sắc website.
+5	JavaScript	Xử lý các tương tác và thao tác phía người dùng.
+6	XAMPP	Cung cấp môi trường máy chủ cục bộ để chạy website PHP và MySQL.
+7	Visual Studio Code	Soạn thảo, chỉnh sửa và quản lý mã nguồn dự án.
+8	Git	Quản lý phiên bản và theo dõi sự thay đổi của mã nguồn.
+9	GitHub	Lưu trữ mã nguồn trực tuyến và hỗ trợ quản lý repository.
+10	Unit Test (PHP)	Kiểm tra tính chính xác của các hàm xử lý trong chương trình.
+11	Postman	Kiểm thử các yêu cầu HTTP và nội dung phản hồi từ máy chủ.
+12	Apache JMeter	Kiểm thử hiệu năng và đánh giá khả năng chịu tải của website.
 ## 📂 Cấu Trúc Thư Mục (Project Structure)
 
 Cấu trúc mã nguồn được tổ chức theo mô hình module hóa, tách biệt rõ ràng giữa quản trị (Admin), giao diện (Assets) và logic xử lý (Modules):
@@ -100,6 +115,8 @@ ToyStore/
 │   ├── orders.php               # Xem lịch sử các đơn hàng đã đặt
 │   ├── profile.php              # Quản lý thông tin cá nhân khách hàng
 │   └── search.php               # Kết quả tìm kiếm sản phẩm
+├── tests/                       # Chứa các tệp mã nguồn phục vụ kiểm thử Unit Test
+|   ├── uni_test.php             # Chứa các trường hợp kiểm thử các hàm xử lý
 ├── index.php                    # Tệp điều hướng chính của hệ thống
 ├── login.php                    # Trang đăng nhập thành viên
 ├── logout.php                   # Xử lý đăng xuất khỏi hệ thống
