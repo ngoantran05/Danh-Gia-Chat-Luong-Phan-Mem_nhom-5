@@ -188,43 +188,28 @@ cd C:\xampp\htdocs
 git clone https://github.com/ngoantran05/Danh-Gia-Chat-Luong-Phan-Mem_nhom-5.git
 ```
 ## 6.3. Cài thư viện PHP
+```text
 composer install
-
-## 6.4. Tạo cấu hình môi trường
-
-Sau khi tải mã nguồn, cần kiểm tra tệp cấu hình kết nối cơ sở dữ liệu trong thư mục config/.
-Các thông tin kết nối sử dụng trong môi trường chạy cục bộ:
-Thông tin
-Giá trị
-Database host
-localhost
-Database name
-toystore_db
-Username
-root
-Password
-Theo cấu hình MySQL trên máy
-Charset
-utf8
-Nếu dự án sử dụng cấu hình kết nối trực tiếp trong tệp PHP, cần mở tệp cấu hình tương ứng và kiểm tra các thông tin trên.
-
-Cập nhật các thông tin kết nối phù hợp với môi trường XAMPP trên máy tính:
-
+```
+6.4. Tạo cấu hình môi trường
+Mở tệp config/db.php và kiểm tra, cập nhật thông tin kết nối cơ sở dữ liệu phù hợp với môi trường XAMPP:
+```text
 $host = "localhost";
 $username = "root";
 $password = "";
 $database = "toystore_db";
-
-Các giá trị trên là ví dụ cho môi trường XAMPP mặc định. Nếu MySQL trên máy sử dụng mật khẩu hoặc cổng khác, cần điều chỉnh cho phù hợp.
+```
+Các thông tin trên áp dụng cho cấu hình MySQL mặc định của XAMPP. Nếu máy tính sử dụng mật khẩu hoặc cổng MySQL khác, cần điều chỉnh cho phù hợp.
 
 ## 6.5. Tạo cơ sở dữ liệu
 Khởi động Apache và MySQL trong XAMPP Control Panel, sau đó truy cập phpMyAdmin.
 
 Tạo cơ sở dữ liệu có tên toystore_db với mã SQL:
+```text
 CREATE DATABASE toystore_db
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
-
+```
 Chọn cơ sở dữ liệu toystore_db và nhập tệp SQL được cung cấp trong mã nguồn (nếu có) để tạo các bảng dữ liệu.
 ## 6.6. Khởi động website
 Khởi động Apache và MySQL trong XAMPP, sau đó mở trình duyệt và truy cập địa chỉ:
@@ -232,145 +217,63 @@ Khởi động Apache và MySQL trong XAMPP, sau đó mở trình duyệt và tr
 Truy cập (http://localhost/Toy_Store-main/) 
 
 Kiểm tra giao diện trang chủ, danh sách sản phẩm và các chức năng chính để xác nhận website hoạt động bình thường.
-6.7. Kiểm tra kết nối
+Sau khi khởi động website, kiểm tra khả năng truy cập, kết nối cơ sở dữ liệu, hiển thị sản phẩm và hoạt động của các chức năng đăng nhập, giỏ hàng, đặt hàng.
 
-Sau khi khởi động website, cần kiểm tra:
+Nếu xuất hiện lỗi, cần kiểm tra lại thông tin kết nối trong config/db.php, bao gồm host, tên database, username, password và cổng MySQL.
+## 6.8. Tài khoản mẫu
+| **Vai trò** | **Email** | **Mật khẩu** | **Trang sau đăng nhập** |
+|---|---|---|---|
+| Quản trị viên | admin@gmail.com | admin | /admin |
+| Khách hàng | user@gmail.com | user | /home |
+**Lưu ý:** Đây là các tài khoản do Seeder tạo để phục vụ thử nghiệm trên môi trường local. Mật khẩu ngắn là dữ liệu mẫu có sẵn; đối với tài khoản đăng ký mới, hệ thống yêu cầu mật khẩu tối thiểu 8 ký tự.
+## 7. KIỂM THỬ PHẦN MỀM
 
-Apache và MySQL đang hoạt động.
+## 7.1. Kiểm thử Unit Test
 
-Website truy cập được trên trình duyệt.
+### 7.1. Kiểm thử Unit Test
 
-Kết nối cơ sở dữ liệu không phát sinh lỗi.
+Unit Test là phương pháp kiểm thử từng đơn vị nhỏ của chương trình, thường là các hàm hoặc phương thức, nhằm xác định kết quả xử lý có đáp ứng yêu cầu hay không.
 
-Các sản phẩm được hiển thị đúng.
+Trong dự án ToyStore, Unit Test được sử dụng để kiểm tra các chức năng tính tổng tiền, xử lý số lượng sản phẩm, kiểm tra tồn kho và phương thức thanh toán.
 
-Các chức năng đăng nhập, giỏ hàng và đặt hàng hoạt động.
+**Công cụ sử dụng:** PHP, PowerShell.
 
-Nếu xuất hiện lỗi kết nối cơ sở dữ liệu, cần kiểm tra lại host, tên database, username, password và cổng MySQL.
+**Tệp kiểm thử:** `tests/unit_test.php`.
 
-6.8. Tài khoản mẫu
+**Các trường hợp kiểm thử:**
 
-Các tài khoản dưới đây được sử dụng để minh họa việc đăng nhập và kiểm thử hệ thống.
+| **Mã TC** | **Nội dung kiểm thử** | **Kết quả mong đợi** |
+|---|---|---|
+| UT01 | Kiểm tra tính tổng tiền | Tổng tiền được tính chính xác |
+| UT02 | Kiểm tra số lượng bằng 0 | Không chấp nhận số lượng không hợp lệ |
+| UT03 | Kiểm tra số lượng hợp lệ | Chấp nhận số lượng hợp lệ |
+| UT04 | Kiểm tra tồn kho đủ | Cho phép xử lý khi tồn kho đáp ứng |
+| UT05 | Kiểm tra tồn kho thiếu | Không cho phép mua vượt số lượng tồn |
+| UT06 | Kiểm tra phương thức thanh toán COD | Nhận diện đúng phương thức COD |
+| UT07 | Kiểm tra phương thức chuyển khoản | Nhận diện đúng phương thức chuyển khoản |
 
-Loại tài khoản
+**Cách thực hiện:**
 
-Tên đăng nhập
+Mở PowerShell tại thư mục dự án và chạy lệnh:
 
-Mật khẩu
-
-Khách hàng
-
-Lấy từ tài khoản đã đăng ký trong cơ sở dữ liệu
-
-Mật khẩu tương ứng
-
-Quản trị viên
-
-Lấy từ tài khoản quản trị đã được tạo
-
-Mật khẩu tương ứng
-
-Lưu ý: Thông tin tài khoản cần được điền theo dữ liệu thực tế trong cơ sở dữ liệu ToyStore. Không sử dụng tài khoản hoặc mật khẩu giả trong báo cáo.
-
-7. KIỂM THỬ PHẦN MỀM
-
-Đề tài sử dụng ba phương pháp kiểm thử chính là Unit Test, Postman và JMeter. Mỗi phương pháp tập trung đánh giá một khía cạnh khác nhau của chất lượng phần mềm.
-
-7.1. Kiểm thử Unit Test
-
-7.1.1. Mục tiêu
-
-Unit Test là phương pháp kiểm thử từng đơn vị nhỏ của chương trình, thường là các hàm hoặc phương thức, nhằm xác định kết quả xử lý có đúng với yêu cầu hay không.
-
-Trong dự án ToyStore, Unit Test được sử dụng để kiểm tra các hàm xử lý liên quan đến tính toán tiền, số lượng sản phẩm, kiểm tra tồn kho và phương thức thanh toán.
-
-7.1.2. Công cụ sử dụng
-
-Ngôn ngữ: PHP.
-
-Môi trường chạy: PowerShell.
-
-Tệp kiểm thử: tests/unit_test.php.
-
-7.1.3. Các trường hợp kiểm thử
-
-Mã TC
-
-Nội dung kiểm thử
-
-Kết quả mong đợi
-
-UT01
-
-Kiểm tra tính tổng tiền
-
-Tổng tiền được tính chính xác
-
-UT02
-
-Kiểm tra số lượng bằng 0
-
-Không chấp nhận số lượng không hợp lệ
-
-UT03
-
-Kiểm tra số lượng hợp lệ
-
-Chấp nhận số lượng hợp lệ
-
-UT04
-
-Kiểm tra tồn kho đủ
-
-Cho phép xử lý khi tồn kho đáp ứng
-
-UT05
-
-Kiểm tra tồn kho thiếu
-
-Không cho phép mua vượt số lượng tồn
-
-UT06
-
-Kiểm tra phương thức thanh toán COD
-
-Nhận diện đúng phương thức COD
-
-UT07
-
-Kiểm tra phương thức chuyển khoản
-
-Nhận diện đúng phương thức chuyển khoản
-
-UT08
-
-Kiểm tra dữ liệu đầu vào không hợp lệ
-
-Phát hiện và xử lý dữ liệu không hợp lệ
-
-7.1.4. Cách thực hiện
-
-Mở PowerShell tại thư mục dự án:
-
-cd C:\xampp\htdocs\Toy_Store-main
-
-Chạy lệnh:
-
+```bash
 php tests/unit_test.php
+```
 
-Chương trình sẽ thực hiện các trường hợp kiểm thử và hiển thị trạng thái tương ứng.
+**Kết quả kiểm thử:**
 
-PASSED: Trường hợp kiểm thử đạt yêu cầu.
+| **Chỉ tiêu** | **Kết quả** |
+|---|---:|
+| Tổng số test | 7 |
+| Passed | 7 |
+| Failed | 0 |
+| Tỷ lệ thành công | 100% |
 
-FAILED: Trường hợp kiểm thử không đạt yêu cầu.
+Kết quả cho thấy cả 7 trường hợp kiểm thử đều đạt yêu cầu, không có trường hợp thất bại.
 
-7.1.5. Kết quả thực hiện
+**Hình ảnh minh chứng:**
 
-Sau khi chạy chương trình, ghi nhận số lượng trường hợp kiểm thử thành công và thất bại.
-
-[CHÈN HÌNH 7.1: Mã nguồn hoặc cấu trúc các trường hợp kiểm thử Unit Test.]
-
-[CHÈN HÌNH 7.2: Kết quả thực hiện Unit Test trên PowerShell.]
+![Kết quả thực hiện Unit Test](images/unit_test.png)
 
 7.2. Kiểm thử bằng Postman
 
