@@ -36,6 +36,8 @@ Dự án bài tập lớn học phần Đánh giá và Kiểm định chất lư
 - Sử dụng JMeter để đánh giá hiệu năng và khả năng chịu tải khi có nhiều người dùng truy cập đồng thời.
 - Phát hiện lỗi trong quá trình xử lý dữ liệu, quản lý sản phẩm, giỏ hàng và đặt hàng; tổng hợp kết quả, đánh giá chất lượng và đề xuất hướng khắc phục.
 ## 3. CHỨC NĂNG
+![Biểu đồ usecase](images/bieudousecase.png)
+
 ## 3.1. Chức năng dành cho khách hàng
 Website ToyStore cung cấp các chức năng chính dành cho khách hàng như sau:
 
