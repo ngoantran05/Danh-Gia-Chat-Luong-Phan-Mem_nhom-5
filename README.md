@@ -235,13 +235,9 @@ Nếu xuất hiện lỗi, cần kiểm tra lại thông tin kết nối trong c
 **Lưu ý:** Đây là các tài khoản do Seeder tạo để phục vụ thử nghiệm trên môi trường local. Mật khẩu ngắn là dữ liệu mẫu có sẵn; đối với tài khoản đăng ký mới, hệ thống yêu cầu mật khẩu tối thiểu 8 ký tự.
 ## 7. KIỂM THỬ PHẦN MỀM
 
-## 7.1. Kiểm thử Unit Test
-
 ### 7.1. Kiểm thử Unit Test
 
-Unit Test là phương pháp kiểm thử từng đơn vị nhỏ của chương trình, thường là các hàm hoặc phương thức, nhằm xác định kết quả xử lý có đáp ứng yêu cầu hay không.
-
-Trong dự án ToyStore, Unit Test được sử dụng để kiểm tra các chức năng tính tổng tiền, xử lý số lượng sản phẩm, kiểm tra tồn kho và phương thức thanh toán.
+Unit Test là phương pháp kiểm thử từng đơn vị nhỏ của chương trình, thường là các hàm hoặc phương thức, nhằm xác định kết quả xử lý có đáp ứng yêu cầu hay không. Trong dự án ToyStore, Unit Test được sử dụng để kiểm tra các chức năng tính tổng tiền, xử lý số lượng sản phẩm, kiểm tra tồn kho và phương thức thanh toán.
 
 **Công cụ sử dụng:** PHP, PowerShell.
 
@@ -284,251 +280,118 @@ Kết quả cho thấy cả 7 trường hợp kiểm thử đều đạt yêu c�
 
 ## 7.2. Kiểm thử bằng Postman
 
-7.2.1. Mục tiêu
+### 7.2.1. Mục tiêu
 
-Postman là công cụ hỗ trợ gửi các yêu cầu HTTP đến máy chủ và kiểm tra phản hồi trả về.
+Sử dụng Postman để kiểm tra khả năng phản hồi HTTP và xử lý yêu cầu của website ToyStore đối với các chức năng khách hàng và quản trị viên.
 
-Trong đề tài, Postman được sử dụng để kiểm tra khả năng phản hồi của website ToyStore thông qua các phương thức HTTP như GET và POST.
+### 7.2.2. Công cụ sử dụng
 
-7.2.2. Công cụ sử dụng
+- **Công cụ: Postman.
+- **Website: `http://localhost/Toy_Store-main/`.
+- **Môi trường:XAMPP.
+- **Giao thức: HTTP (GET, POST).
 
-Postman.
+### 7.2.3. Các trường hợp kiểm thử
 
-Website ToyStore chạy trên localhost.
+Đã xây dựng Collection **ToyStore - API Testing** gồm 20 request, bao gồm các nhóm chức năng:
 
-Giao thức HTTP.
+| Nhóm chức năng | Nội dung kiểm thử |
+|---|---|
+| Trang chủ và sản phẩm | Truy cập trang chủ, danh mục, chi tiết và tìm kiếm sản phẩm |
+| Giỏ hàng | Xem, thêm, cập nhật và xóa sản phẩm |
+| Tài khoản | Đăng ký, đăng nhập và đăng xuất |
+| Đơn hàng | Đặt hàng, xem lịch sử và hủy đơn |
+| Quản trị viên | Truy cập trang quản trị, quản lý sản phẩm và đơn hàng |
 
-7.2.3. Các trường hợp kiểm thử
+### 7.2.4. Cách thực hiện
 
-Mã TC
+- Khởi động Apache và MySQL trong XAMPP.
+- Mở Postman và chọn Collection ToyStore - API Testing.
+- Chọn request, phương thức HTTP và URL tương ứng.
+- Với POST, nhập dữ liệu vào Body theo yêu cầu của chức năng.
+- Nhấn **Send** hoặc chạy toàn bộ Collection bằng Runner.
+- Kiểm tra Status Code, Response Body và kết quả các điều kiện kiểm thử.
 
-Phương thức
+### 7.2.5. Kết quả kiểm thử
 
-Địa chỉ kiểm thử
+Kết quả chạy Collection bằng Postman Runner:
 
-Mục đích
+| Chỉ số | Kết quả |
+|---|---:|
+| Số lần chạy (Iterations) | 1 |
+| Tổng số kiểm tra (Assertions) | 60 |
+| Passed | 60 |
+| Failed | 0 |
+| Errors | 0 |
+| Skipped | 0 |
+| Thời gian chạy | 8 giây 17 ms |
+| Thời gian phản hồi trung bình | 42 ms |
 
-API01
+**Đánh giá:** Cả 60 điều kiện kiểm tra đều đạt yêu cầu, không ghi nhận lỗi. Thời gian phản hồi trung bình là 42 ms. Kết quả cho thấy các request trong Collection phản hồi đúng theo những điều kiện đã thiết lập.
 
-GET
+**Hình ảnh kết quả kiểm thử Postman:**
 
-http://localhost/Toy_Store-main/
-
-Kiểm tra khả năng truy cập trang chủ
-
-API02
-
-GET
-
-http://localhost/Toy_Store-main/index.php?mod=cart
-
-Kiểm tra trang giỏ hàng
-
-API03
-
-GET
-
-http://localhost/Toy_Store-main/index.php?mod=checkout
-
-Kiểm tra trang thanh toán
-
-API04
-
-GET
-
-http://localhost/Toy_Store-main/index.php?mod=cart&act=del&id=18
-
-Kiểm tra yêu cầu xóa sản phẩm khỏi giỏ hàng
-
-API05
-
-POST
-
-Theo URL và dữ liệu POST của chức năng được kiểm thử
-
-Kiểm tra khả năng gửi dữ liệu đến máy chủ
-
-7.2.4. Cách thực hiện
-
-Bước 1: Mở Postman.
-
-Bước 2: Tạo một HTTP Request mới.
-
-Bước 3: Chọn phương thức GET hoặc POST.
-
-Bước 4: Nhập địa chỉ website cần kiểm thử.
-
-Bước 5: Với phương thức POST, nhập dữ liệu vào phần Body theo đúng tên trường mà mã nguồn xử lý.
-
-Bước 6: Nhấn Send để gửi yêu cầu.
-
-Bước 7: Quan sát kết quả phản hồi.
-
-Các thông tin cần ghi nhận:
-
-Status Code.
-
-Response Body.
-
-Thời gian phản hồi.
-
-Kích thước dữ liệu trả về.
-
-Nội dung phản hồi có phù hợp với yêu cầu hay không.
-
-7.2.5. Đánh giá kết quả
-
-Đối với các yêu cầu GET, cần kiểm tra máy chủ có trả về nội dung phù hợp hay không.
-
-Đối với các yêu cầu POST, cần kiểm tra dữ liệu gửi lên có được tiếp nhận và xử lý đúng hay không.
-
-Lưu ý: Website PHP sử dụng cơ chế điều hướng qua tham số mod và act, không mặc nhiên là một REST API độc lập. Vì vậy, khi kiểm thử cần lựa chọn đúng URL, phương thức HTTP và dữ liệu đầu vào theo cách mà mã nguồn thực tế xử lý.
-
-HTTP 200 chỉ thể hiện yêu cầu được máy chủ phản hồi thành công ở mức giao thức, không đồng nghĩa với việc nghiệp vụ đã xử lý chính xác.
-
-[CHÈN HÌNH 7.3: Kết quả kiểm thử phương thức GET bằng Postman.]
-
-[CHÈN HÌNH 7.4: Kết quả kiểm thử phương thức POST bằng Postman.]
+![Postman Run Results](images/postman_results.png)
 
 ## 7.3. Kiểm thử hiệu năng bằng JMeter
 
-7.3.1. Mục tiêu
+### 7.3.1. Mục tiêu
 
-Apache JMeter là công cụ kiểm thử hiệu năng, được sử dụng để đánh giá khả năng phản hồi của hệ thống khi có nhiều yêu cầu được gửi đến trong cùng một khoảng thời gian.
+Sử dụng Apache JMeter để đánh giá thời gian phản hồi, khả năng xử lý yêu cầu và độ ổn định của website ToyStore khi có nhiều yêu cầu được gửi đến.
 
-Trong đề tài, JMeter được sử dụng để đánh giá khả năng xử lý các yêu cầu truy cập website ToyStore khi số lượng người dùng đồng thời tăng lên.
+### 7.3.2. Công cụ sử dụng
 
-7.3.2. Công cụ sử dụng
+- Apache JMeter 5.6.3.
+- Website ToyStore chạy trên XAMPP.
+- Các thành phần: Thread Group, HTTP Request, View Results Tree và Summary Report.
 
-Apache JMeter 5.6.3.
+### 7.3.3. Các chức năng kiểm thử
 
-Website ToyStore chạy trên XAMPP.
+| Mã TC | Chức năng |
+|---|---|
+| TC01 | Truy cập trang chủ |
+| TC02 | Danh mục sản phẩm |
+| TC03 | Chi tiết sản phẩm |
+| TC04 | Tìm kiếm sản phẩm |
+| TC05 | Xem giỏ hàng |
+| TC06 | Thêm sản phẩm vào giỏ hàng |
+| TC07 | Đăng nhập |
+| TC08 | Đặt hàng |
 
-HTTP Request.
+Mỗi chức năng được gửi 50 yêu cầu, tổng cộng 400 yêu cầu.
 
-Thread Group.
+### 7.3.4. Cách thực hiện
 
-Summary Report.
+1. Mở Apache JMeter và tạo Test Plan.
+2. Thêm Thread Group để cấu hình người dùng kiểm thử.
+3. Thêm HTTP Request và nhập địa chỉ website, phương thức truy cập.
+4. Thêm View Results Tree và Summary Report.
+5. Nhấn Start để chạy kiểm thử.
+6. Quan sát và ghi nhận kết quả trong Summary Report.
 
-View Results Tree.
+### 7.3.5. Kết quả kiểm thử
 
-7.3.3. Cấu hình kiểm thử
+Kết quả tổng hợp từ Summary Report:
 
-Các thông số cấu hình cần ghi nhận trong bài kiểm thử:
+| Chỉ số | Kết quả |
+|---|---:|
+| Tổng số Samples | 400 |
+| Average | 17 ms |
+| Min | 1 ms |
+| Max | 119 ms |
+| Standard Deviation | 26.37 ms |
+| Error % | 0.00% |
+| Throughput | 41.4 requests/sec |
 
-Thông số
+### 7.3.6. Đánh giá kết quả
 
-Giá trị
+Kết quả kiểm thử cho thấy website đã xử lý thành công 400 yêu cầu, không ghi nhận lỗi trong quá trình chạy. Thời gian phản hồi trung bình đạt 17 ms, thấp nhất 1 ms và cao nhất 119 ms. Throughput đạt khoảng 41.4 yêu cầu/giây.
 
-Number of Threads (Users)
+Nhìn chung, website phản hồi ổn định trong phạm vi kịch bản kiểm thử trên môi trường local. Tuy nhiên, kết quả chưa đại diện cho khả năng chịu tải khi triển khai trên máy chủ thực tế.
 
-Theo kịch bản chạy thực tế
+**Hình ảnh kết quả kiểm thử JMeter:**
 
-Ramp-up Period
-
-Theo cấu hình thực tế
-
-Loop Count
-
-Theo cấu hình thực tế
-
-Protocol
-
-HTTP
-
-Server Name
-
-localhost
-
-Port
-
-Theo cấu hình Apache
-
-Path
-
-Đường dẫn chức năng cần kiểm thử
-
-Method
-
-GET hoặc POST
-
-7.3.4. Các bước thực hiện
-
-Bước 1: Mở Apache JMeter.
-
-Bước 2: Tạo một Test Plan mới.
-
-Bước 3: Thêm Thread Group để cấu hình số lượng người dùng đồng thời.
-
-Bước 4: Thêm HTTP Request để khai báo địa chỉ website và phương thức gửi yêu cầu.
-
-Bước 5: Thêm các Listener cần thiết:
-
-View Results Tree.
-
-Summary Report.
-
-Aggregate Report (nếu cần).
-
-Bước 6: Nhấn Start để bắt đầu kiểm thử.
-
-Bước 7: Quan sát kết quả và lưu lại báo cáo.
-
-7.3.5. Các chỉ số đánh giá
-
-Chỉ số
-
-Ý nghĩa
-
-Samples
-
-Tổng số yêu cầu được gửi
-
-Average
-
-Thời gian phản hồi trung bình
-
-Median
-
-Thời gian phản hồi trung vị
-
-90% Line
-
-90% yêu cầu có thời gian phản hồi không vượt quá giá trị này
-
-Throughput
-
-Số yêu cầu được xử lý trong một đơn vị thời gian
-
-Error %
-
-Tỷ lệ yêu cầu xảy ra lỗi
-
-Min
-
-Thời gian phản hồi nhỏ nhất
-
-Max
-
-Thời gian phản hồi lớn nhất
-
-7.3.6. Đánh giá kết quả
-
-Thông qua các chỉ số trên, có thể đánh giá khả năng xử lý yêu cầu của website.
-
-Average càng thấp thì thời gian phản hồi trung bình càng nhanh.
-
-Throughput càng cao thì khả năng xử lý yêu cầu trong một đơn vị thời gian càng lớn.
-
-Error % càng thấp thì hệ thống càng ổn định trong kịch bản kiểm thử.
-
-Median và 90% Line giúp đánh giá mức độ ổn định của thời gian phản hồi.
-
-[CHÈN HÌNH 7.5: Cấu hình Thread Group trong JMeter.]
-
-[CHÈN HÌNH 7.6: Cấu hình HTTP Request trong JMeter.]
-
-[CHÈN HÌNH 7.7: Kết quả Summary Report hoặc Aggregate Report của JMeter.]
+![JMeter Summary Report](images/jmeter_summary.png)
 
 ## 8. KẾT QUẢ KIỂM THỬ
 
@@ -536,130 +399,41 @@ Median và 90% Line giúp đánh giá mức độ ổn định của thời gian
 
 Sau khi thực hiện Unit Test bằng PHP, kết quả được tổng hợp như sau:
 
-| **Nội dung** | **Kết quả** |
+| Nội dung | Kết quả |
 |---|---:|
 | Tổng số test case | 7 |
-| Số test case PASSED | 7 |
-| Số test case FAILED | 0 |
+| Passed | 7 |
+| Failed | 0 |
 | Tỷ lệ thành công | 100% |
 
-**Công thức tính tỷ lệ thành công:**
+**Nhận xét:** Cả 7 trường hợp kiểm thử đều đạt yêu cầu, không có trường hợp thất bại.
 
-Tỷ lệ thành công = (Số test case PASSED / Tổng số test case) × 100%
+### 8.2. Kết quả Postman
 
-**Nhận xét:** Cả 7 trường hợp kiểm thử đều đạt yêu cầu, không có trường hợp thất bại. Điều này cho thấy các chức năng được kiểm tra hoạt động đúng theo kết quả mong đợi trong phạm vi Unit Test đã xây dựng.
-## 8.2. Kết quả Postman
+| Chỉ số | Kết quả |
+|---|---:|
+| Tổng số kiểm tra | 60 |
+| Passed | 60 |
+| Failed | 0 |
+| Errors | 0 |
+| Thời gian phản hồi trung bình | 42 ms |
+| Thời gian chạy | 8 giây 17 ms |
 
-Kết quả kiểm thử Postman được tổng hợp theo các yêu cầu HTTP đã thực hiện.
+**Nhận xét:** Toàn bộ 60 điều kiện kiểm tra đều Passed. Website phản hồi theo các điều kiện đã thiết lập trong Collection Postman.
 
-Mã TC
+### 8.3. Kết quả JMeter
 
-Phương thức
+| Chỉ số | Kết quả |
+|---|---:|
+| Tổng số Samples | 400 |
+| Average | 17 ms |
+| Min | 1 ms |
+| Max | 119 ms |
+| Standard Deviation | 26.37 ms |
+| Throughput | 41.4 requests/sec |
+| Error % | 0.00% |
 
-Status Code
-
-Thời gian phản hồi
-
-Kết quả
-
-API01
-
-GET
-
-........
-
-........
-
-........
-
-API02
-
-GET
-
-........
-
-........
-
-........
-
-API03
-
-GET
-
-........
-
-........
-
-........
-
-API04
-
-GET
-
-........
-
-........
-
-........
-
-API05
-
-POST
-
-........
-
-........
-
-........
-
-Nhận xét: Postman hỗ trợ kiểm tra khả năng tiếp nhận và phản hồi yêu cầu của website. Ngoài mã trạng thái HTTP, cần đối chiếu nội dung phản hồi với kết quả nghiệp vụ mong đợi.
-
-## 8.3. Kết quả JMeter
-
-Kết quả kiểm thử hiệu năng được ghi nhận dựa trên Summary Report hoặc Aggregate Report.
-
-Chỉ số
-
-Kết quả
-
-Number of Threads
-
-........
-
-Ramp-up Period
-
-........
-
-Loop Count
-
-........
-
-Samples
-
-........
-
-Average
-
-........ ms
-
-Median
-
-........ ms
-
-90% Line
-
-........ ms
-
-Throughput
-
-........
-
-Error %
-
-........ %
-
-Nhận xét: Các chỉ số trên được sử dụng để đánh giá thời gian phản hồi, khả năng xử lý yêu cầu và tỷ lệ lỗi của website trong điều kiện kiểm thử đã thiết lập.
-
+**Nhận xét:** Website xử lý thành công 400 yêu cầu trong kịch bản kiểm thử, không ghi nhận lỗi. Thời gian phản hồi trung bình là 17 ms và Throughput đạt 41.4 yêu cầu/giây. Kết quả cho thấy website hoạt động ổn định trong môi trường và điều kiện kiểm thử đã thiết lập.
 ## 8.4. Xem báo cáo 
 
 Các kết quả kiểm thử được lưu lại để phục vụ việc theo dõi, đánh giá và đối chiếu:
@@ -683,11 +457,11 @@ Trong quá trình phát triển và kiểm thử website ToyStore, một số v�
 
 Trong thời gian tới, website ToyStore có thể được cải thiện theo các hướng sau:
 
-- **Hoàn thiện chức năng:** Bổ sung chức năng quản lý sản phẩm, cải thiện tìm kiếm, lọc sản phẩm và hoàn thiện quy trình đặt hàng, thanh toán.
-- **Nâng cao bảo mật:** Tăng cường kiểm tra dữ liệu đầu vào, hạn chế SQL Injection và Cross-Site Scripting (XSS), phân quyền rõ ràng giữa khách hàng và quản trị viên.
-- **Cải thiện hiệu năng:** Tối ưu truy vấn cơ sở dữ liệu, hình ảnh và tài nguyên giao diện nhằm giảm thời gian tải trang.
-- **Mở rộng kiểm thử:** Bổ sung các trường hợp Unit Test, xây dựng thêm kịch bản Postman và kiểm thử hiệu năng với nhiều mức tải khác nhau bằng JMeter.
-- **Hoàn thiện tài liệu:** Cập nhật hướng dẫn cài đặt, sử dụng và lưu trữ kết quả kiểm thử trên GitHub để thuận tiện cho việc theo dõi, đánh giá các phiên bản.
+- **Hoàn thiện chức năng: Bổ sung chức năng quản lý sản phẩm, cải thiện tìm kiếm, lọc sản phẩm và hoàn thiện quy trình đặt hàng, thanh toán.
+- **Nâng cao bảo mật: Tăng cường kiểm tra dữ liệu đầu vào, hạn chế SQL Injection và Cross-Site Scripting (XSS), phân quyền rõ ràng giữa khách hàng và quản trị viên.
+- **Cải thiện hiệu năng: Tối ưu truy vấn cơ sở dữ liệu, hình ảnh và tài nguyên giao diện nhằm giảm thời gian tải trang.
+- **Mở rộng kiểm thử: Bổ sung các trường hợp Unit Test, xây dựng thêm kịch bản Postman và kiểm thử hiệu năng với nhiều mức tải khác nhau bằng JMeter.
+- **Hoàn thiện tài liệu: Cập nhật hướng dẫn cài đặt, sử dụng và lưu trữ kết quả kiểm thử trên GitHub để thuận tiện cho việc theo dõi, đánh giá các phiên bản.
 
 ## 11. TÀI LIỆU
 
