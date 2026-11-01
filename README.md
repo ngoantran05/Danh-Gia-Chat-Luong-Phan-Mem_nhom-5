@@ -39,6 +39,7 @@ Dự án bài tập lớn học phần Đánh giá và Kiểm định chất lư
 Website có hai nhóm tác nhân: Khách hàng và quản trị viên
 ** Biểu đồ usecase tổng quát**
 ![Biểu đồ usecase](images/bieudousecase.png)
+
 Biểu đồ trích từ báo cáo, mô tả phạm vi yêu cầu. Một số chức năng trong thiết kế chưa được triển khai đầy đủ.
 ## 3.1. Chức năng dành cho khách hàng
 Website ToyStore cung cấp các chức năng chính dành cho khách hàng như sau:
@@ -66,6 +67,7 @@ Website ToyStore cung cấp các chức năng chính dành cho khách hàng như
 | 4 | Quản lý đơn hàng | Xem và cập nhật trạng thái đơn hàng |
 | 5 | Quản lý người dùng | Theo dõi thông tin khách hàng |
 | 6 | Quản lý dữ liệu | Kiểm tra và quản lý thông tin trong hệ thống |
+
 ## 4. Công nghệ sử dụng
 
 | **Thành phần** | **Công nghệ** |
@@ -80,6 +82,7 @@ Website ToyStore cung cấp các chức năng chính dành cho khách hàng như
 | Kiểm thử đơn vị | Unit Test (PHP) |
 | Kiểm thử HTTP | Postman |
 | Kiểm thử hiệu năng | Apache JMeter |
+
 ## 📂 Cấu Trúc Thư Mục (Project Structure)
 
 Cấu trúc mã nguồn được tổ chức theo mô hình module hóa, tách biệt rõ ràng giữa quản trị (Admin), giao diện (Assets) và logic xử lý (Modules):
