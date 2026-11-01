@@ -175,20 +175,18 @@ ToyStore/
 - Kết nối mạng khi tải mã nguồn và cài đặt các công cụ cần thiết.
 
 ## 6.2. Tải mã nguồn
+Tải mã nguồn dự án từ GitHub tại repository: ToyStore – GitHub.
 
-Có thể tải mã nguồn dự án từ GitHub theo các bước:
-Bước 1: Truy cập repository:
-https://github.com/ngoantran05/Danh-Gia-Chat-Luong-Phan-Mem_nhom-5
-Bước 2: Chọn nút Code, sau đó chọn Download ZIP để tải mã nguồn.
-Bước 3: Giải nén tệp vừa tải.
-Bước 4: Đổi tên thư mục thành Toy_Store-main nếu cần.
-Bước 5: Sao chép thư mục dự án vào đường dẫn:
+Chọn Code → Download ZIP để tải và giải nén mã nguồn, sau đó đổi tên thư mục thành Toy_Store-main (nếu cần) và sao chép vào đường dẫn:
+```text
 C:\xampp\htdocs\Toy_Store-main
-Có thể sử dụng Git để tải mã nguồn trực tiếp bằng lệnh:
+```
+
+Hoặc sử dụng Git để tải mã nguồn trực tiếp:
+```text
 cd C:\xampp\htdocs
 git clone https://github.com/ngoantran05/Danh-Gia-Chat-Luong-Phan-Mem_nhom-5.git
-Nếu sử dụng Git, cần bảo đảm tên thư mục sau khi tải phù hợp với đường dẫn được cấu hình trong các bước tiếp theo.
-
+```
 ## 6.3. Cài thư viện PHP
 composer install
 
