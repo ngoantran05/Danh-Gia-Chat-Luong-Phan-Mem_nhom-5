@@ -682,76 +682,15 @@ Trong thời gian tới, website ToyStore có thể được cải thiện theo 
 - **Mở rộng kiểm thử:** Bổ sung các trường hợp Unit Test, xây dựng thêm kịch bản Postman và kiểm thử hiệu năng với nhiều mức tải khác nhau bằng JMeter.
 - **Hoàn thiện tài liệu:** Cập nhật hướng dẫn cài đặt, sử dụng và lưu trữ kết quả kiểm thử trên GitHub để thuận tiện cho việc theo dõi, đánh giá các phiên bản.
 
-11. TÀI LIỆU
+## 11. TÀI LIỆU
 
-Tài liệu PHP: https://www.php.net/docs.php
+- Tài liệu PHP: https://www.php.net/docs.php
+- Tài liệu MySQL: https://dev.mysql.com/doc/
+- Tài liệu XAMPP: https://www.apachefriends.org/
+- Tài liệu Visual Studio Code: https://code.visualstudio.com/docs
+- Tài liệu Git: https://git-scm.com/doc
+- Tài liệu GitHub: https://docs.github.com/
+- Tài liệu Postman: https://learning.postman.com/
+- Tài liệu Apache JMeter: https://jmeter.apache.org/usermanual/
+- Repository dự án ToyStore: https://github.com/ngoantran05/Danh-Gia-Chat-Luong-Phan-Mem_nhom-5
 
-Tài liệu MySQL: https://dev.mysql.com/doc/
-
-Tài liệu XAMPP: https://www.apachefriends.org/
-
-Tài liệu Visual Studio Code: https://code.visualstudio.com/docs
-
-Tài liệu Git: https://git-scm.com/doc
-
-Tài liệu GitHub: https://docs.github.com/
-
-Tài liệu Postman: https://learning.postman.com/
-
-Tài liệu Apache JMeter: https://jmeter.apache.org/usermanual/
-
-Repository dự án ToyStore: https://github.com/ngoantran05/Danh-Gia-Chat-Luong-Phan-Mem_nhom-5
-
-KẾT LUẬN
-
-Thông qua đề tài “Kiểm thử và đánh giá chất lượng website ToyStore”, nhóm đã có cơ hội vận dụng kiến thức về kiểm thử phần mềm vào một dự án website thương mại điện tử thực tế.
-
-Ba phương pháp được sử dụng gồm Unit Test, Postman và JMeter đã hỗ trợ đánh giá các khía cạnh khác nhau của hệ thống. Unit Test tập trung kiểm tra tính chính xác của các hàm xử lý, Postman kiểm tra khả năng tiếp nhận và phản hồi yêu cầu HTTP, còn JMeter đánh giá hiệu năng và khả năng xử lý nhiều yêu cầu đồng thời.
-
-Qua quá trình thực hiện, nhóm hiểu rõ hơn vai trò của kiểm thử trong phát triển phần mềm, biết cách sử dụng các công cụ kiểm thử và tổng hợp kết quả để đánh giá chất lượng hệ thống.
-
-Mặc dù website vẫn còn một số hạn chế cần tiếp tục cải thiện, đề tài đã giúp nhóm củng cố kiến thức lập trình, kiểm thử và quản lý dự án. Đây cũng là cơ sở để tiếp tục hoàn thiện ToyStore trong tương lai.
-## 🏗 Kiến Trúc Hệ Thống
-
-Hệ thống hoạt động dựa trên cơ chế Routing cơ bản tại index.php. Mọi yêu cầu từ người dùng sẽ đi qua Router để gọi các module tương ứng từ thư mục modules/.
-
-Sơ đồ luồng dữ liệu (Simplified Data Flow):
-Request: Người dùng truy cập index.php?page=cart
-
-Routing: File index.php kiểm tra tham số page.
-
-Controller: Gọi file modules/cart.php.
-
-View: Hiển thị giao diện Giỏ hàng kèm dữ liệu từ Session/Database.
-
----
-
-## ✨ Chức Năng Chi Tiết
-
-1. Phân hệ Khách hàng (Front-end)
-   Authentication: Đăng ký, Đăng nhập, Đăng xuất (login.php, register.php).
-
-Mua sắm: Xem sản phẩm, Lọc theo danh mục, Tìm kiếm thông minh.
-
-Đặt hàng: Quy trình thêm vào giỏ hàng và thanh toán nhanh gọn.
-
-Cá nhân: Quản lý thông tin tài khoản (profile.php).
-
-2. Phân hệ Quản trị (Back-end)
-   Quản lý Sản phẩm (CRUD): Thêm, Sửa, Xóa, Cập nhật hình ảnh.
-
-Quản lý Đơn hàng: Theo dõi trạng thái đơn hàng, xem chi tiết người mua.
-
-Thống kê: Báo cáo doanh thu và tình trạng kho hàng thực tế.
-
----
-
-## ⚙️ Yêu Cầu Cài Đặt
-
-Web Server: XAMPP / WAMP (Apache).
-
-PHP Version: 7.4 trở lên.
-
-Database: MySQL.
-
-Trình duyệt: Chrome/Edge bản mới nhất.
