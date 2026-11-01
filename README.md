@@ -84,7 +84,7 @@ Website ToyStore cung cấp các chức năng chính dành cho khách hàng như
 
 Cấu trúc mã nguồn được tổ chức theo mô hình module hóa, tách biệt rõ ràng giữa quản trị (Admin), giao diện (Assets) và logic xử lý (Modules):
 
----
+```text
 
 ToyStore/
 ├── admin/
@@ -122,7 +122,7 @@ ToyStore/
 ├── logout.php
 ├── register.php
 └── README.md
----
+```
 ## Vai trò các thành phần 
 
 | STT | Đường dẫn | Vai trò |
