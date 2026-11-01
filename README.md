@@ -223,8 +223,8 @@ Nếu xuất hiện lỗi, cần kiểm tra lại thông tin kết nối trong c
 ## 6.8. Tài khoản mẫu
 | **Vai trò** | **Email** | **Mật khẩu** | **Trang sau đăng nhập** |
 |---|---|---|---|
-| Quản trị viên | admin@gmail.com | admin | /admin |
-| Khách hàng | user@gmail.com | user | /home |
+| Quản trị viên | admin123@gmail.com | admin | /admin |
+| Khách hàng | user12345@gmail.com | user | /home |
 **Lưu ý:** Đây là các tài khoản do Seeder tạo để phục vụ thử nghiệm trên môi trường local. Mật khẩu ngắn là dữ liệu mẫu có sẵn; đối với tài khoản đăng ký mới, hệ thống yêu cầu mật khẩu tối thiểu 8 ký tự.
 ## 7. KIỂM THỬ PHẦN MỀM
 
@@ -275,7 +275,7 @@ Kết quả cho thấy cả 7 trường hợp kiểm thử đều đạt yêu c�
 
 ![Kết quả thực hiện Unit Test](images/unit_test.png)
 
-7.2. Kiểm thử bằng Postman
+## 7.2. Kiểm thử bằng Postman
 
 7.2.1. Mục tiêu
 
@@ -383,7 +383,7 @@ HTTP 200 chỉ thể hiện yêu cầu được máy chủ phản hồi thành c
 
 [CHÈN HÌNH 7.4: Kết quả kiểm thử phương thức POST bằng Postman.]
 
-7.3. Kiểm thử hiệu năng bằng JMeter
+## 7.3. Kiểm thử hiệu năng bằng JMeter
 
 7.3.1. Mục tiêu
 
@@ -523,39 +523,25 @@ Median và 90% Line giúp đánh giá mức độ ổn định của thời gian
 
 [CHÈN HÌNH 7.7: Kết quả Summary Report hoặc Aggregate Report của JMeter.]
 
-8. KẾT QUẢ KIỂM THỬ
+## 8. KẾT QUẢ KIỂM THỬ
 
-8.1. Kết quả Unit Test
+### 8.1. Kết quả Unit Test
 
-Sau khi thực hiện Unit Test, kết quả được tổng hợp theo số lượng trường hợp kiểm thử đạt và không đạt.
+Sau khi thực hiện Unit Test bằng PHP, kết quả được tổng hợp như sau:
 
-Nội dung
+| **Nội dung** | **Kết quả** |
+|---|---:|
+| Tổng số test case | 7 |
+| Số test case PASSED | 7 |
+| Số test case FAILED | 0 |
+| Tỷ lệ thành công | 100% |
 
-Kết quả
-
-Tổng số test case
-
-8
-
-Số test case PASSED
-
-........
-
-Số test case FAILED
-
-........
-
-Tỷ lệ thành công
-
-........ %
-
-Công thức tính tỷ lệ thành công:
+**Công thức tính tỷ lệ thành công:**
 
 Tỷ lệ thành công = (Số test case PASSED / Tổng số test case) × 100%
 
-Nhận xét: Kết quả Unit Test giúp xác định những hàm xử lý hoạt động chính xác và những trường hợp cần tiếp tục điều chỉnh.
-
-8.2. Kết quả Postman
+**Nhận xét:** Cả 7 trường hợp kiểm thử đều đạt yêu cầu, không có trường hợp thất bại. Điều này cho thấy các chức năng được kiểm tra hoạt động đúng theo kết quả mong đợi trong phạm vi Unit Test đã xây dựng.
+## 8.2. Kết quả Postman
 
 Kết quả kiểm thử Postman được tổng hợp theo các yêu cầu HTTP đã thực hiện.
 
@@ -621,7 +607,7 @@ POST
 
 Nhận xét: Postman hỗ trợ kiểm tra khả năng tiếp nhận và phản hồi yêu cầu của website. Ngoài mã trạng thái HTTP, cần đối chiếu nội dung phản hồi với kết quả nghiệp vụ mong đợi.
 
-8.3. Kết quả JMeter
+## 8.3. Kết quả JMeter
 
 Kết quả kiểm thử hiệu năng được ghi nhận dựa trên Summary Report hoặc Aggregate Report.
 
@@ -667,155 +653,34 @@ Error %
 
 Nhận xét: Các chỉ số trên được sử dụng để đánh giá thời gian phản hồi, khả năng xử lý yêu cầu và tỷ lệ lỗi của website trong điều kiện kiểm thử đã thiết lập.
 
-8.4. Tổng hợp kết quả kiểm thử
+## 8.4. Xem báo cáo 
 
-Phương pháp
+Các kết quả kiểm thử được lưu lại để phục vụ việc theo dõi, đánh giá và đối chiếu:
 
-Nội dung đánh giá
+- [Mã nguồn dự án ToyStore](https://github.com/ngoantran05/Danh-Gia-Chat-Luong-Phan-Mem_nhom-5)
+- [Thư mục kiểm thử Unit Test](https://github.com/ngoantran05/Danh-Gia-Chat-Luong-Phan-Mem_nhom-5/tree/main/tests) 
+## 9. CÁC VẤN ĐỀ ĐÃ BIẾT
 
-Kết quả
+Trong quá trình phát triển và kiểm thử website ToyStore, một số vấn đề cần lưu ý gồm:
 
-Unit Test
+| **STT** | **Vấn đề** | **Ảnh hưởng** | **Hướng xử lý** |
+|---|---|---|---|
+| 1 | Dữ liệu đầu vào không hợp lệ | Có thể gây lỗi khi xử lý | Kiểm tra và xác thực dữ liệu |
+| 2 | Số lượng sản phẩm vượt tồn kho | Có thể dẫn đến sai lệch đơn hàng | Kiểm tra tồn kho trước khi đặt hàng |
+| 3 | Cấu hình kết nối cơ sở dữ liệu chưa chính xác | Website không thể truy cập dữ liệu | Kiểm tra thông tin kết nối |
+| 4 | Thời gian phản hồi tăng khi có nhiều yêu cầu | Ảnh hưởng trải nghiệm người dùng | Tối ưu truy vấn và xử lý |
+| 5 | Một số yêu cầu HTTP trả về lỗi | Chức năng có thể không hoạt động đúng | Kiểm tra URL, phương thức và dữ liệu gửi lên |
 
-Kiểm tra tính chính xác của các hàm xử lý
-
-........
-
-Postman
-
-Kiểm tra request và response HTTP
-
-........
-
-JMeter
-
-Kiểm tra hiệu năng và khả năng chịu tải
-
-........
-
-8.5. Đánh giá chung
-
-Qua ba phương pháp kiểm thử, có thể đánh giá chất lượng website ToyStore trên các khía cạnh:
-
-Về tính chính xác: Unit Test giúp kiểm tra các hàm xử lý quan trọng, hạn chế lỗi trong quá trình tính toán và xử lý dữ liệu.
-
-Về khả năng phản hồi: Postman hỗ trợ kiểm tra các yêu cầu HTTP và nội dung phản hồi từ máy chủ.
-
-Về hiệu năng: JMeter cung cấp các số liệu về thời gian phản hồi, thông lượng và tỷ lệ lỗi khi có nhiều yêu cầu truy cập.
-
-Việc kết hợp ba phương pháp giúp đánh giá website ở nhiều góc độ khác nhau, từ xử lý nội bộ đến giao tiếp HTTP và hiệu năng hệ thống.
-
-[CHÈN HÌNH 8.1: Bảng tổng hợp kết quả kiểm thử Unit Test, Postman và JMeter.]
-
-9. CÁC VẤN ĐỀ ĐÃ BIẾT
-
-Trong quá trình phát triển và kiểm thử website ToyStore, có thể phát sinh một số vấn đề cần lưu ý.
-
-STT
-
-Vấn đề
-
-Ảnh hưởng
-
-Hướng xử lý
-
-1
-
-Dữ liệu đầu vào không hợp lệ
-
-Có thể gây lỗi khi xử lý
-
-Kiểm tra và xác thực dữ liệu
-
-2
-
-Số lượng sản phẩm vượt tồn kho
-
-Có thể dẫn đến sai lệch đơn hàng
-
-Kiểm tra số lượng tồn trước khi đặt
-
-3
-
-Cấu hình kết nối cơ sở dữ liệu chưa chính xác
-
-Website không truy cập được dữ liệu
-
-Kiểm tra thông tin kết nối
-
-4
-
-Thời gian phản hồi tăng khi có nhiều yêu cầu
-
-Ảnh hưởng trải nghiệm người dùng
-
-Tối ưu truy vấn và xử lý
-
-5
-
-Một số yêu cầu HTTP trả về lỗi
-
-Chức năng có thể không hoạt động đúng
-
-Kiểm tra URL, phương thức và dữ liệu gửi lên
-
-Các vấn đề trên cần được đối chiếu với kết quả kiểm thử thực tế. Chỉ ghi nhận là lỗi đã phát hiện khi có bằng chứng từ quá trình chạy thử.
-
-10. HƯỚNG PHÁT TRIỂN
+**Lưu ý:** Các vấn đề trên là những rủi ro cần lưu ý trong quá trình kiểm thử, không mặc nhiên là lỗi đã được phát hiện. Chỉ xác nhận lỗi khi có kết quả kiểm thử thực tế làm bằng chứng.
+## 10. HƯỚNG PHÁT TRIỂN
 
 Trong thời gian tới, website ToyStore có thể được cải thiện theo các hướng sau:
 
-10.1. Hoàn thiện chức năng
-
-Bổ sung các chức năng quản lý sản phẩm.
-
-Cải thiện chức năng tìm kiếm và lọc sản phẩm.
-
-Hoàn thiện quy trình đặt hàng và thanh toán.
-
-Cải thiện chức năng theo dõi trạng thái đơn hàng.
-
-10.2. Nâng cao bảo mật
-
-Tăng cường kiểm tra dữ liệu đầu vào.
-
-Sử dụng các phương thức bảo vệ tài khoản phù hợp.
-
-Hạn chế các nguy cơ SQL Injection và Cross-Site Scripting.
-
-Phân quyền rõ ràng giữa khách hàng và quản trị viên.
-
-10.3. Cải thiện hiệu năng
-
-Tối ưu các câu truy vấn cơ sở dữ liệu.
-
-Tối ưu hình ảnh và tài nguyên giao diện.
-
-Giảm thời gian tải trang.
-
-Tiếp tục kiểm thử với nhiều mức tải khác nhau bằng JMeter.
-
-10.4. Nâng cao hoạt động kiểm thử
-
-Mở rộng số lượng trường hợp Unit Test.
-
-Bổ sung các trường hợp kiểm thử dữ liệu không hợp lệ.
-
-Xây dựng thêm các kịch bản Postman.
-
-Thực hiện nhiều kịch bản kiểm thử hiệu năng với số lượng người dùng khác nhau.
-
-Lưu trữ kết quả kiểm thử để thuận tiện cho việc so sánh giữa các phiên bản.
-
-10.5. Hoàn thiện tài liệu dự án
-
-Bổ sung hướng dẫn cài đặt và sử dụng.
-
-Cập nhật README trên GitHub.
-
-Quản lý mã nguồn bằng Git.
-
-Lưu trữ các kết quả kiểm thử và báo cáo theo từng phiên bản.
+- **Hoàn thiện chức năng:** Bổ sung chức năng quản lý sản phẩm, cải thiện tìm kiếm, lọc sản phẩm và hoàn thiện quy trình đặt hàng, thanh toán.
+- **Nâng cao bảo mật:** Tăng cường kiểm tra dữ liệu đầu vào, hạn chế SQL Injection và Cross-Site Scripting (XSS), phân quyền rõ ràng giữa khách hàng và quản trị viên.
+- **Cải thiện hiệu năng:** Tối ưu truy vấn cơ sở dữ liệu, hình ảnh và tài nguyên giao diện nhằm giảm thời gian tải trang.
+- **Mở rộng kiểm thử:** Bổ sung các trường hợp Unit Test, xây dựng thêm kịch bản Postman và kiểm thử hiệu năng với nhiều mức tải khác nhau bằng JMeter.
+- **Hoàn thiện tài liệu:** Cập nhật hướng dẫn cài đặt, sử dụng và lưu trữ kết quả kiểm thử trên GitHub để thuận tiện cho việc theo dõi, đánh giá các phiên bản.
 
 11. TÀI LIỆU
 
