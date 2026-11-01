@@ -67,19 +67,19 @@ Website ToyStore cung cấp các chức năng chính dành cho khách hàng như
 | 5 | Quản lý người dùng | Theo dõi thông tin khách hàng |
 | 6 | Quản lý dữ liệu | Kiểm tra và quản lý thông tin trong hệ thống |
 ## 4. Công nghệ sử dụng
-STT	Công nghệ / Công cụ	Vai trò và mục đích sử dụng
-1	PHP	Xây dựng và xử lý các chức năng phía máy chủ của website.
-2	MySQL	Lưu trữ và quản lý dữ liệu sản phẩm, tài khoản, giỏ hàng và đơn hàng.
-3	HTML	Xây dựng cấu trúc các trang web.
-4	CSS	Thiết kế giao diện, bố cục và màu sắc website.
-5	JavaScript	Xử lý các tương tác và thao tác phía người dùng.
-6	XAMPP	Cung cấp môi trường máy chủ cục bộ để chạy website PHP và MySQL.
-7	Visual Studio Code	Soạn thảo, chỉnh sửa và quản lý mã nguồn dự án.
-8	Git	Quản lý phiên bản và theo dõi sự thay đổi của mã nguồn.
-9	GitHub	Lưu trữ mã nguồn trực tuyến và hỗ trợ quản lý repository.
-10	Unit Test (PHP)	Kiểm tra tính chính xác của các hàm xử lý trong chương trình.
-11	Postman	Kiểm thử các yêu cầu HTTP và nội dung phản hồi từ máy chủ.
-12	Apache JMeter	Kiểm thử hiệu năng và đánh giá khả năng chịu tải của website.
+
+| **Thành phần** | **Công nghệ** |
+|---|---|
+| Ngôn ngữ lập trình | PHP |
+| Cơ sở dữ liệu | MySQL |
+| Giao diện | HTML, CSS, JavaScript |
+| Môi trường phát triển | XAMPP |
+| Trình soạn thảo mã nguồn | Visual Studio Code |
+| Quản lý phiên bản | Git |
+| Lưu trữ mã nguồn | GitHub |
+| Kiểm thử đơn vị | Unit Test (PHP) |
+| Kiểm thử HTTP | Postman |
+| Kiểm thử hiệu năng | Apache JMeter |
 ## 📂 Cấu Trúc Thư Mục (Project Structure)
 
 Cấu trúc mã nguồn được tổ chức theo mô hình module hóa, tách biệt rõ ràng giữa quản trị (Admin), giao diện (Assets) và logic xử lý (Modules):
