@@ -231,7 +231,7 @@ Chọn cơ sở dữ liệu toystore_db và nhập tệp SQL được cung cấp
 ## 6.6. Khởi động website
 Khởi động Apache và MySQL trong XAMPP, sau đó mở trình duyệt và truy cập địa chỉ:
 
-Truy cập [ToyStore](http://localhost/Toy_Store-main/) để sử dụng website sau khi khởi động Apache và MySQL trên XAMPP.
+Truy cập (http://localhost/Toy_Store-main/) 
 
 Kiểm tra giao diện trang chủ, danh sách sản phẩm và các chức năng chính để xác nhận website hoạt động bình thường.
 6.7. Kiểm tra kết nối
